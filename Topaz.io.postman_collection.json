@@ -1,0 +1,289 @@
+{
+	"info": {
+		"_postman_id": "d3f03ced-f007-409f-a714-a6ec01e34ed1",
+		"name": "Topaz.io",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Retrieve Object",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://sandbox.topaz.io/v1/apps/{{appId}}/objects/{{objectId}}",
+					"protocol": "https",
+					"host": [
+						"sandbox",
+						"topaz",
+						"io"
+					],
+					"path": [
+						"v1",
+						"apps",
+						"{{appId}}",
+						"objects",
+						"{{objectId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create App",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d97d57fc-ce42-4ea2-9028-6954d0819b95",
+						"exec": [
+							"let responseJson = pm.response.json()",
+							"",
+							"pm.environment.set(\"appId\", responseJson.id);",
+							"pm.environment.set(\"userId\", responseJson.userId);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \n  \"name\": \"{{appName}}\", \n  \"interval\": 60 \n}"
+				},
+				"url": {
+					"raw": "https://sandbox.topaz.io/v1/apps",
+					"protocol": "https",
+					"host": [
+						"sandbox",
+						"topaz",
+						"io"
+					],
+					"path": [
+						"v1",
+						"apps"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Object",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "20d1f910-ec13-4807-8817-6e0a32c331be",
+						"exec": [
+							"let responseJson = pm.response.json()",
+							"",
+							"pm.environment.set(\"objectId\", responseJson.id);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://sandbox.topaz.io/v1/apps/{{appId}}/objects",
+					"protocol": "https",
+					"host": [
+						"sandbox",
+						"topaz",
+						"io"
+					],
+					"path": [
+						"v1",
+						"apps",
+						"{{appId}}",
+						"objects"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Store hash in object",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0e85ac7e-c280-4f23-8d7a-4ed37f6a9c46",
+						"exec": [
+							"let responseJson = pm.response.json()",
+							"",
+							"pm.environment.set(\"hashId\", responseJson.id);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/javascript",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"hash\": \"3536d18588e0bd8319e8e2c8df8e79dbb82504a511de8e453a985b08e4fe709f\"\n}"
+				},
+				"url": {
+					"raw": "https://sandbox.topaz.io/v1/apps/{{appId}}/objects/{{objectId}}/hashes",
+					"protocol": "https",
+					"host": [
+						"sandbox",
+						"topaz",
+						"io"
+					],
+					"path": [
+						"v1",
+						"apps",
+						"{{appId}}",
+						"objects",
+						"{{objectId}}",
+						"hashes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Retrieve Hash",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f152591e-4f67-4124-96b0-57d344ef828a",
+						"exec": [
+							"let responseJson = pm.response.json()",
+							"",
+							"pm.environment.set(\"proofId\", responseJson.proofId);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://sandbox.topaz.io/v1/apps/{{appId}}/objects/{{objectId}}/hashes/{{hashId}}",
+					"protocol": "https",
+					"host": [
+						"sandbox",
+						"topaz",
+						"io"
+					],
+					"path": [
+						"v1",
+						"apps",
+						"{{appId}}",
+						"objects",
+						"{{objectId}}",
+						"hashes",
+						"{{hashId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Retrieve Proof Info",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://sandbox.topaz.io/v1/apps/{{appId}}/proofs/{{proofId}}",
+					"protocol": "https",
+					"host": [
+						"sandbox",
+						"topaz",
+						"io"
+					],
+					"path": [
+						"v1",
+						"apps",
+						"{{appId}}",
+						"proofs",
+						"{{proofId}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{apiKey}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "d840906b-a597-4c2b-9dfb-af5d1197eac9",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "1529e883-eba6-4b8b-a202-9b29ed811fa0",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
